@@ -4,13 +4,44 @@ output:
   html_document:
     keep_md: true
 ---
-
+The intention of this study is to process and analyze the information related to 
+the activities being done by a subject in periods of time. This is now possible with the 
+rise of new technologies and devices that let us access data that was too complex to get obtain in the past. In particular this study works in the analysis of 5 minute intervals that monitor the amount of steps of an anonymous individual each day from October to November 2012.
 
 ## Loading and preprocessing the data
+The data is available is the activity.zip file. and can be loaded with the following instructions
+```{r loadProcess}
+unzip("activity.zip")
+activities <- read.csv("activity.csv")
+```
+Many of the questions answered here refer to daily information, the information was grouped 
+and processed in a daily basis so we group and sum the amount of steps by day using the dplyr library.
 
-
+```{r message=FALSE}
+library(dplyr)
+daily <- group_by(activities,date,steps)
+daily <- summarize(daily)
+```
 
 ## What is mean total number of steps taken per day?
+
+The distribution of steps per day along the duration of the experiment is described by the following histogram
+
+```{r}
+hist(daily$steps,
+     xlab = "Total Steps By day",
+     col="blue")
+```
+
+
+After arranging the number of steps by day we can obtain the means of the steps the subject executed during the experiment
+
+
+```{r}
+  mean(daily$steps,na.rm = T)
+  median(daily$steps,na.rm =T)
+```
+
 
 
 
