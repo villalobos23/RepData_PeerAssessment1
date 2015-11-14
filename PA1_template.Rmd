@@ -23,6 +23,15 @@ daily <- group_by(activities,date,steps)
 daily <- summarize(daily)
 ```
 
+The rest of the relevant information is contained if we observe based on the intervals of time of the different days the experiment took place, here we group the information by the different intervals of measurement.
+
+```{r}
+activities$interval <- as.factor(unique(activities$interval))
+by.interval <- group_by(activities,interval,steps)
+by.interval <- summarize(by.interval)
+by.interval <- summarize_each(by.interval,funs(mean(.,na.rm = TRUE)))
+```
+
 ## What is mean total number of steps taken per day?
 
 The distribution of steps per day along the duration of the experiment is described by the following histogram
@@ -33,8 +42,7 @@ hist(daily$steps,
      col="blue")
 ```
 
-
-After arranging the number of steps by day we can obtain the means of the steps the subject executed during the experiment
+The histogram shows us that we have several days that did not register any kind of activity, yet the remaining days give us a range of steps taken. After arranging the number of steps by day we can obtain the means of the steps the subject executed during the experiment
 
 
 ```{r}
@@ -43,14 +51,32 @@ After arranging the number of steps by day we can obtain the means of the steps 
 ```
 
 
-
-
 ## What is the average daily activity pattern?
 
+Throught a day, the average amount of steps in each 5-min time interval is displayed by the following figure.
 
+```{r echo=FALSE}
+plot(by.interval$interval,by.interval$steps,
+     main = "Average amount of steps by interval",
+     xlab = "Intervals",
+     ylab = "Average amount of steps",
+    type="l")
+```
+The figure shows us a peak of steps between the intervals 800 and 900. We can obtain the interval that has the maximum amount of steps in an average day.
+
+```{r}
+maxStepRow <- which(by.interval$steps == max(by.interval$steps), arr.ind = T)
+by.interval[maxStepRow,]
+```
+
+As a conclusion the individual that performed the activities has demanding activities at the beggining of the day.
 
 ## Imputing missing values
 
+amount of NAs
+```{r}
+length(which(is.na(activities$steps)))
+```
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
