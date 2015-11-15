@@ -61,7 +61,7 @@ The histogram shows us that we have several days that did not register any kind 
 
 Throught a day, the average amount of steps in each 5-min time interval is displayed by the following figure.
 
-```{r echo=FALSE , AverageStepsByInt}
+```{r AverageStepsByInt}
 plot(by.interval$interval,by.interval$steps,
      main = "Average amount of steps by interval",
      xlab = "Intervals",
@@ -130,7 +130,7 @@ weekendPattern <- summarize_each(weekendPattern,funs(mean(.,na.rm = TRUE)))
 
 We generate a time series of the steps by interval for weekdays, and for weekends
 
-```{r echo=FALSE, weekdayPattern}
+```{r weekdayPattern}
 plot(weekdayPattern$interval,weekdayPattern$steps,
      main = "Weekday Average amount of steps by interval",
      xlab = "Intervals",
@@ -139,7 +139,7 @@ plot(weekdayPattern$interval,weekdayPattern$steps,
 ```
 
 
-```{r echo = FALSE, weekEndPattern}
+```{r weekEndPattern}
 plot(weekendPattern$interval,weekendPattern$steps,
      main = "Weekend Average amount of steps by interval",
      xlab = "Intervals",

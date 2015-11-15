@@ -72,6 +72,15 @@ The histogram shows us that we have several days that did not register any kind 
 
 Throught a day, the average amount of steps in each 5-min time interval is displayed by the following figure.
 
+
+```r
+plot(by.interval$interval,by.interval$steps,
+     main = "Average amount of steps by interval",
+     xlab = "Intervals",
+     ylab = "Average amount of steps",
+    type="l")
+```
+
 ![](figure/AverageStepsByInt-1.png) 
 
 The figure shows us a peak of steps between the intervals 800 and 900. We can obtain the interval that has the maximum amount of steps in an average day.
@@ -165,8 +174,26 @@ weekendPattern <- summarize_each(weekendPattern,funs(mean(.,na.rm = TRUE)))
 
 We generate a time series of the steps by interval for weekdays, and for weekends
 
+
+```r
+plot(weekdayPattern$interval,weekdayPattern$steps,
+     main = "Weekday Average amount of steps by interval",
+     xlab = "Intervals",
+     ylab = "Average amount of steps",
+    type="l")
+```
+
 ![](figure/weekdayPattern-1.png) 
 
+
+
+```r
+plot(weekendPattern$interval,weekendPattern$steps,
+     main = "Weekend Average amount of steps by interval",
+     xlab = "Intervals",
+     ylab = "Average amount of steps",
+    type="l")
+```
 
 ![](figure/weekEndPattern-1.png) 
 
